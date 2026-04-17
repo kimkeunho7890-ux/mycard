@@ -177,22 +177,29 @@ function generateVCard() {
         title: "과장",
         org: "주식회사 유모스트",
         tel: "010-3644-7890",
-        email: "most7890@naver.com"
+        email: "most7890@naver.com",
+        work_desc: "정책, 투자, 정산, 재고, 회계, 영업관리"
     };
 
-    const vcard = `BEGIN:VCARD
-VERSION:3.0
-FN:${info.name} ${info.title}
-ORG:${info.org}
-TEL;TYPE=CELL:${info.tel}
-EMAIL:${info.email}
-END:VCARD`;
+    // 아이폰 호환성을 극대화한 VCF 포맷
+    const vcard = [
+        "BEGIN:VCARD",
+        "VERSION:3.0",
+        `N:김;근호;;;`,               // 성과 이름을 명확히 구분 (아이폰 저장 시 이름 우선순위)
+        `FN:${info.name}`,            // 표시되는 전체 이름
+        `TITLE:${info.title}`,         // 직위
+        `ORG:${info.org}`,             // 회사명
+        `TEL;TYPE=CELL,VOICE:${info.tel}`, // 아이폰에서 휴대전화로 인식하게 설정
+        `EMAIL;TYPE=PREF,INTERNET:${info.email}`,
+        `NOTE:주요업무 : ${info.work_desc}`, // 비고란에 업무 내용 추가
+        "END:VCARD"
+    ].join("\n");
 
-    const blob = new Blob([vcard], { type: "text/vcard" });
+    const blob = new Blob([vcard], { type: "text/vcard;charset=utf-8" });
     const url = window.URL.createObjectURL(blob);
     const newLink = document.createElement('a');
     newLink.href = url;
-    newLink.setAttribute('download', `${info.name}_과장_명함.vcf`);
+    newLink.setAttribute('download', `${info.name}_명함.vcf`);
     newLink.click();
     window.URL.revokeObjectURL(url);
 }
