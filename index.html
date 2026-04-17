@@ -44,10 +44,11 @@
 
         .header-company-name {
             color: white;
-            font-size: 22px;
-            font-weight: 800; /* 굵게 */
-            letter-spacing: -0.5px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            font-size: 28px; /* 기존 22px에서 28px로 확대 */
+            font-weight: 900; /* 가장 굵은 두께로 변경 */
+            letter-spacing: 2px; /* 자간을 벌려 시원한 느낌 추가 (기본은 마이너스 값이었음) */
+            text-shadow: 0 3px 6px rgba(0,0,0,0.2); /* 글씨가 커진 만큼 그림자도 살짝 강화 */
+            word-break: keep-all; /* 줄바꿈 방지 */
         }
 
         .profile-container {
