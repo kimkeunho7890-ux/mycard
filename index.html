@@ -225,7 +225,7 @@ function typeSimultaneously() {
     }
 }
 
-// 상단 애니메이션이 어느 정도 진행된 후(1초 뒤) 동시 타이핑 시작
+// 페이지 로드 후 1초 뒤에 동시 타이핑 시작
 window.onload = () => setTimeout(typeSimultaneously, 1000);
 
 function generateVCard() {
@@ -238,6 +238,7 @@ function generateVCard() {
         work_desc: "정책, 투자, 정산, 재고, 회계, 영업관리"
     };
 
+    // 아이폰/안드로이드 모두 대응 가능한 vCard 포맷
     const vcard = [
         "BEGIN:VCARD",
         "VERSION:3.0",
@@ -256,6 +257,13 @@ function generateVCard() {
     const newLink = document.createElement('a');
     newLink.href = url;
     newLink.setAttribute('download', `${info.name}_명함.vcf`);
+    
+    // 안드로이드 사용자용 안내 메시지
+    const isAndroid = /Android/i.test(navigator.userAgent);
+    if (isAndroid) {
+        alert("연락처 파일이 다운로드됩니다.\n완료 후 상단 알림창에서 파일을 눌러 '저장'을 완료해 주세요! 😊");
+    }
+
     newLink.click();
     window.URL.revokeObjectURL(url);
 }
