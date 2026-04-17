@@ -53,7 +53,7 @@
             font-weight: 900;
             letter-spacing: 2px;
             text-shadow: 0 3px 6px rgba(0,0,0,0.2);
-            animation: fadeInUp 1s ease-out forwards; /* 애니메이션 적용 */
+            animation: fadeInUp 1s ease-out forwards;
         }
 
         .profile-container {
@@ -102,7 +102,7 @@
             padding: 20px; 
             border-radius: 15px;
             margin-bottom: 25px;
-            min-height: 160px; /* 타이핑 시 높이 변화 방지 */
+            min-height: 160px; 
         }
 
         .info-item { 
@@ -201,34 +201,32 @@
 </div>
 
 <script>
-// [애니메이션] 타이핑 효과 스크립트
+// [애니메이션] 3개 라인 동시 타이핑 효과 스크립트
 const typingData = [
-    { id: 'type-phone', text: '010-3644-7890' },
-    { id: 'type-email', text: 'most7890@naver.com' },
-    { id: 'type-work', text: '정책, 투자, 정산, 재고, 회계, 영업관리' }
+    { id: 'type-phone', text: '010-3644-7890', charIndex: 0 },
+    { id: 'type-email', text: 'most7890@naver.com', charIndex: 0 },
+    { id: 'type-work', text: '정책, 투자, 정산, 재고, 회계, 영업관리', charIndex: 0 }
 ];
 
-function typeAll(index = 0) {
-    if (index >= typingData.length) return;
-    
-    const item = typingData[index];
-    const element = document.getElementById(item.id);
-    let charIndex = 0;
+function typeSimultaneously() {
+    let allFinished = true;
 
-    function startTyping() {
-        if (charIndex < item.text.length) {
-            element.innerHTML += item.text.charAt(charIndex);
-            charIndex++;
-            setTimeout(startTyping, 50); // 타이핑 속도
-        } else {
-            setTimeout(() => typeAll(index + 1), 200); // 다음 줄 시작 지연
+    typingData.forEach(item => {
+        const element = document.getElementById(item.id);
+        if (item.charIndex < item.text.length) {
+            element.innerHTML += item.text.charAt(item.charIndex);
+            item.charIndex++;
+            allFinished = false;
         }
+    });
+
+    if (!allFinished) {
+        setTimeout(typeSimultaneously, 50); // 타이핑 속도
     }
-    startTyping();
 }
 
-// 페이지 로드 후 1.5초 뒤(상단 애니메이션 후) 타이핑 시작
-window.onload = () => setTimeout(typeAll, 1500);
+// 상단 애니메이션이 어느 정도 진행된 후(1초 뒤) 동시 타이핑 시작
+window.onload = () => setTimeout(typeSimultaneously, 1000);
 
 function generateVCard() {
     const info = {
