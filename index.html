@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>김근호 과장 디지털 명함</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-color: #f4f7f6;
+        }
+        body {
+            font-family: 'Pretendard', -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 350px;
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        h1 { margin: 0; font-size: 24px; color: var(--primary-color); }
+        p { margin: 5px 0 20px; color: #7f8c8d; font-size: 16px; }
+        .info-group { text-align: left; margin-bottom: 30px; }
+        .info-item { margin: 10px 0; font-size: 14px; color: #34495e; }
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        .btn:hover { background-color: var(--accent-color); }
+        .footer { margin-top: 20px; font-size: 12px; color: #bdc3c7; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="profile-img">K</div>
+    <h1>김근호</h1>
+    <p>정책,정산팀 / 관리팀 과장</p>
+    
+    <div class="info-group">
+        <div class="info-item">📞 010-3644-7890</div>
+        <div class="info-item">📧 most7890@naver.com</div>
+        <div class="info-item">🏢 주식회사 유모스트</div>
+    </div>
+
+    <button class="btn" onclick="generateVCard()">연락처 저장하기</button>
+    
+    <div class="footer">QR 스캔을 통해 연결된 디지털 명함입니다.</div>
+</div>
+
+<script>
+function generateVCard() {
+    // 1. 정보 설정 (근호님의 실제 정보로 수정하세요)
+    const info = {
+        name: "김근호",
+        title: "과장",
+        org: "정책,정산팀 / 관리팀",
+        tel: "010-3644-7890",
+        email: "most7890@naver.com"
+    };
+
+    // 2. VCF 포맷 생성
+    const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:${info.name} ${info.title}
+ORG:${info.org}
+TEL;TYPE=CELL:${info.tel}
+EMAIL:${info.email}
+END:VCARD`;
+
+    // 3. 파일 다운로드 트리거
+    const blob = new Blob([vcard], { type: "text/vcard" });
+    const url = window.URL.createObjectURL(blob);
+    const newLink = document.createElement('a');
+    newLink.href = url;
+    newLink.setAttribute('download', `${info.name}_명함.vcf`);
+    newLink.click();
+    window.URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>
