@@ -6,7 +6,6 @@
     <title>김근호 과장 디지털 명함</title>
     <style>
         :root {
-            /* LGU+ 브랜드 컬러 및 세련된 다크그레이 */
             --uplus-pink: #E6007E;
             --dark-gray: #333333;
             --light-bg: #f8f9fa;
@@ -33,54 +32,54 @@
             transition: transform 0.3s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* 상단 컬러 바 */
+        /* 상단 핑크색 헤더 영역 */
         .card-header {
             background-color: var(--uplus-pink);
-            height: 100px;
+            height: 130px; /* 회사명을 위해 높이 확보 */
             display: flex;
             justify-content: center;
-            align-items: flex-end;
-            padding-bottom: 40px;
+            align-items: center; /* 회사명 중앙 배치 */
+            padding-bottom: 20px;
+        }
+
+        .header-company-name {
+            color: white;
+            font-size: 22px;
+            font-weight: 800; /* 굵게 */
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .profile-container {
             position: relative;
-            margin-top: -50px; /* 헤더에 걸치게 배치 */
+            margin-top: -45px; /* 헤더에 걸치게 배치 */
             background: white;
             padding: 5px;
             border-radius: 50%;
             display: inline-block;
+            z-index: 10;
         }
 
         .profile-img {
             width: 100px;
             height: 100px;
-            /* 배경을 확실한 흰색으로 설정 */
             background-color: #ffffff !important; 
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            /* 테두리를 살짝 주어 흰색 배경 카드와 구분되게 함 */
             border: 1px solid #eeeeee; 
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.02);
         }
 
         .profile-img img {
-            /* 이미지의 배경이 투명하든 흰색이든 자연스럽게 맞춤 */
             width: 75%; 
             height: 75%;
             object-fit: contain;
-            background-color: #ffffff; /* 이미지 영역 자체 배경도 흰색 */
         }
 
         .content {
-            padding: 20px 30px 40px;
+            padding: 10px 30px 40px;
             text-align: center;
         }
 
@@ -98,12 +97,23 @@
         .info-item { 
             margin: 12px 0; 
             font-size: 15px; 
-            color: #555; 
+            color: #444; 
             display: flex;
             align-items: center;
         }
 
-        .info-item span { margin-right: 12px; font-size: 18px; }
+        .info-item span { margin-right: 12px; font-size: 18px; width: 20px; text-align: center; }
+
+        /* 주요업무 스타일 */
+        .info-item.work-desc {
+            align-items: flex-start;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #f9dbe9;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #555;
+        }
 
         .btn {
             background: var(--uplus-pink);
@@ -119,23 +129,19 @@
             transition: all 0.2s ease;
         }
 
-        .btn:active {
-            transform: scale(0.98);
-            box-shadow: 0 2px 5px rgba(230, 0, 126, 0.2);
-        }
-
         .footer { 
             margin-top: 25px; 
             font-size: 13px; 
-            color: #a0a0a0; 
-            line-height: 1.5;
+            color: #a0a0a0;
         }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="card-header"></div>
+    <div class="card-header">
+        <div class="header-company-name">주식회사 유모스트</div>
+    </div>
     <div class="content">
         <div class="profile-container">
             <div class="profile-img">
@@ -149,7 +155,10 @@
         <div class="info-group">
             <div class="info-item"><span>📞</span> 010-3644-7890</div>
             <div class="info-item"><span>📧</span> most7890@naver.com</div>
-            <div class="info-item"><span>🏢</span> 주식회사 유모스트</div>
+            <div class="info-item work-desc">
+                <span>📂</span> 
+                <div><strong>주요업무 :</strong> 정책, 투자, 정산, 재고, 회계, 영업관리</div>
+            </div>
         </div>
 
         <button class="btn" onclick="generateVCard()">연락처 휴대폰에 저장</button>
@@ -165,7 +174,7 @@ function generateVCard() {
     const info = {
         name: "김근호",
         title: "과장",
-        org: "주식회사 유모스트 (정책·정산팀 / 관리팀)",
+        org: "주식회사 유모스트",
         tel: "010-3644-7890",
         email: "most7890@naver.com"
     };
