@@ -6,91 +6,165 @@
     <title>김근호 과장 디지털 명함</title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --bg-color: #f4f7f6;
+            /* LGU+ 브랜드 컬러 및 세련된 다크그레이 */
+            --uplus-pink: #E6007E;
+            --dark-gray: #333333;
+            --light-bg: #f8f9fa;
         }
+
         body {
             font-family: 'Pretendard', -apple-system, sans-serif;
-            background-color: var(--bg-color);
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
+            padding: 20px;
         }
+
         .card {
             background: white;
-            width: 90%;
-            max-width: 350px;
-            padding: 40px 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
+            width: 100%;
+            max-width: 360px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
         }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* 상단 컬러 바 */
+        .card-header {
+            background-color: var(--uplus-pink);
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 40px;
+        }
+
+        .profile-container {
+            position: relative;
+            margin-top: -50px; /* 헤더에 걸치게 배치 */
+            background: white;
+            padding: 5px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
         .profile-img {
             width: 100px;
             height: 100px;
-            background: var(--primary-color);
+            background: #fff;
             border-radius: 50%;
-            margin: 0 auto 20px;
             display: flex;
             justify-content: center;
             align-items: center;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
+            overflow: hidden;
+            border: 2px solid #eee;
         }
-        h1 { margin: 0; font-size: 24px; color: var(--primary-color); }
-        p { margin: 5px 0 20px; color: #7f8c8d; font-size: 16px; }
-        .info-group { text-align: left; margin-bottom: 30px; }
-        .info-item { margin: 10px 0; font-size: 14px; color: #34495e; }
+
+        .profile-img img {
+            width: 80%; /* 로고가 꽉 차지 않게 여백 조절 */
+            object-fit: contain;
+        }
+
+        .content {
+            padding: 20px 30px 40px;
+            text-align: center;
+        }
+
+        h1 { margin: 10px 0 5px; font-size: 26px; color: var(--dark-gray); letter-spacing: -1px; }
+        .position { margin-bottom: 25px; color: var(--uplus-pink); font-size: 16px; font-weight: 600; }
+        
+        .info-group { 
+            text-align: left; 
+            background: #fdf2f8; 
+            padding: 20px; 
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-item { 
+            margin: 12px 0; 
+            font-size: 15px; 
+            color: #555; 
+            display: flex;
+            align-items: center;
+        }
+
+        .info-item span { margin-right: 12px; font-size: 18px; }
+
         .btn {
-            background-color: var(--primary-color);
+            background: var(--uplus-pink);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
-            font-size: 16px;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 17px;
             font-weight: bold;
             cursor: pointer;
             width: 100%;
-            transition: background 0.3s;
+            box-shadow: 0 4px 15px rgba(230, 0, 126, 0.3);
+            transition: all 0.2s ease;
         }
-        .btn:hover { background-color: var(--accent-color); }
-        .footer { margin-top: 20px; font-size: 12px; color: #bdc3c7; }
+
+        .btn:active {
+            transform: scale(0.98);
+            box-shadow: 0 2px 5px rgba(230, 0, 126, 0.2);
+        }
+
+        .footer { 
+            margin-top: 25px; 
+            font-size: 13px; 
+            color: #a0a0a0; 
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
 
 <div class="card">
-    <div class="profile-img">K</div>
-    <h1>김근호</h1>
-    <p>정책,정산팀 / 관리팀 과장</p>
-    
-    <div class="info-group">
-        <div class="info-item">📞 010-3644-7890</div>
-        <div class="info-item">📧 most7890@naver.com</div>
-        <div class="info-item">🏢 주식회사 유모스트</div>
-    </div>
+    <div class="card-header"></div>
+    <div class="content">
+        <div class="profile-container">
+            <div class="profile-img">
+                <img src="uplus_logo_pink.png" alt="U+ Logo">
+            </div>
+        </div>
+        
+        <h1>김근호</h1>
+        <div class="position">정책·정산팀 / 관리팀 과장</div>
+        
+        <div class="info-group">
+            <div class="info-item"><span>📞</span> 010-3644-7890</div>
+            <div class="info-item"><span>📧</span> most7890@naver.com</div>
+            <div class="info-item"><span>🏢</span> 주식회사 유모스트</div>
+        </div>
 
-    <button class="btn" onclick="generateVCard()">연락처 저장하기</button>
-    
-    <div class="footer">앞으로 잘~~ 부탁드립니다. *^^*.</div>
+        <button class="btn" onclick="generateVCard()">연락처 휴대폰에 저장</button>
+        
+        <div class="footer">
+            언제나 정확한 정산과 관리로 보답하겠습니다.<br>
+            <strong>앞으로 잘 부탁드립니다! 😊</strong>
+        </div>
+    </div>
 </div>
 
 <script>
 function generateVCard() {
-    // 1. 정보 설정 (근호님의 실제 정보로 수정하세요)
     const info = {
         name: "김근호",
         title: "과장",
-        org: "정책,정산팀 / 관리팀",
+        org: "주식회사 유모스트 (정책·정산팀 / 관리팀)",
         tel: "010-3644-7890",
         email: "most7890@naver.com"
     };
 
-    // 2. VCF 포맷 생성
     const vcard = `BEGIN:VCARD
 VERSION:3.0
 FN:${info.name} ${info.title}
@@ -99,12 +173,11 @@ TEL;TYPE=CELL:${info.tel}
 EMAIL:${info.email}
 END:VCARD`;
 
-    // 3. 파일 다운로드 트리거
     const blob = new Blob([vcard], { type: "text/vcard" });
     const url = window.URL.createObjectURL(blob);
     const newLink = document.createElement('a');
     newLink.href = url;
-    newLink.setAttribute('download', `${info.name}_명함.vcf`);
+    newLink.setAttribute('download', `${info.name}_과장_명함.vcf`);
     newLink.click();
     window.URL.revokeObjectURL(url);
 }
